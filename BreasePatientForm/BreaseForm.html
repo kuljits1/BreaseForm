@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Patient Information Form | Brease</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+            <script>
+              // Initialize Firebase
+              var config = {
+                apiKey: "Insert App Key",
+                authDomain: "Insert auth Domain ",
+                databaseURL: "Insert URL",
+                projectId: "Insert ID",
+                storageBucket: "Insert Bucket",
+                messagingSenderId: "Insert messaging ID"
+              };
+              firebase.initializeApp(config);
+
+            
+            var dataB = firebase.database(); 
+            
+            function TimeStamp(UNIX_timestamp){
+                  var a = new Date(UNIX_timestamp);
+                  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                  var year = a.getFullYear();
+                  var month = months[a.getMonth()];
+                  var date = a.getDate();
+                  var hour = a.getHours();
+                  var min = a.getMinutes();
+                  var sec = a.getSeconds();
+                  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+                  return time;
+            }
+             
+            
+            
+            function inputPatientInformation() {
+                
+                var FN = document.getElementById("FullName").value 
+                var ID = document.getElementById("Student ID").value
+                var CO = document.getElementById("College").value
+                var Syph = document.getElementById("Syphillis").value
+                var Hiv = document.getElementById("HIV").value
+                var Gono = document.getElementById("Gonorrhea").value
+                var Chlam = document.getElementById("Chlamydia").value
+                var check_up = document.getElementById("lastcheckup").value
+                var timestamp = TimeStamp(Date.now());  
+                 
+                
+                
+                firebase.database().ref(CO).child(ID).set({
+                FullName: FN,
+                StudentID: ID,
+                College : CO, 
+                Syphilis: Syph,
+                HIV: Hiv, 
+                Gonorrhea: Gono, 
+                Chlamydia: Chlam, 
+                LastCheckUp: check_up, 
+                When_Submitted: timestamp 
+            
+            
+              });
+            }            
+          
+    </script>
+    
+</head>
+
+<body>
+
+    <div class="container" id="wrapper">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1> <strong> Brease Patient Information Form </strong> </h1>
+            </div>
+        </div>
+        <div class="center" class="container">
+        <form  onsubmit = "return inputPatientInformation();">
+            <div class="form-group">
+                <label class="req" for="student-name"> <strong> Full Name: </strong> </label>
+                <input type="text" class="form-control" id="FullName" required>
+            </div>
+            <div class="form-group">
+                <label class="req" for="student-id"> <strong>Student ID: </strong> </label>
+                <input type="text" class="form-control" id="Student ID" required>
+            </div>
+            <div class="form-group">
+                <label class="req" for="college"> <strong> College: </strong> </label>
+                <select class="form-control" id="College" required>
+                    <option></option>
+                    <option>UC Irvine</option>
+                    <option>UC Riverside</option>
+                    <option>UC Los Angeles</option>
+                    <option>UC Berkeley</option>
+                    <option>UC Merced</option>
+                    <option>UC Santa Cruz</option>
+                    <option>UC Santa Barbara</option>
+                    <option>UC San Diego</option>
+                    <option>UC San Francisco</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="std"> <strong>STD Status: </strong></label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <label class="checkbox-inline custom-box">
+                                    <input type="checkbox" class="form-check-input" data-val="false" value="false" id = "HIV">HIV
+                                </label>
+                                <script>
+                                        $('#checkbox-value').text($('#HIV').val());
+                                        $("#HIV").on('change', function() {
+                                          if ($(this).is(':checked')) {
+                                            $(this).attr('value', 'true');
+                                          } else {
+                                            $(this).attr('value', 'false');
+                                          }
+                                          $('#checkbox-value').text($('#HIV').val());
+                                        });
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <label class="checkbox-inline custom-box">
+                                    <input type="checkbox" class="form-check-input" data-val="false" value="false" id="Syphillis">Syphillis
+                                </label>
+                                <script>
+                                        $('#checkbox-value').text($('#Syphillis').val());
+                                        $("#Syphillis").on('change', function() {
+                                          if ($(this).is(':checked')) {
+                                            $(this).attr('value', 'true');
+                                          } else {
+                                            $(this).attr('value', 'false');
+                                          }
+                                          $('#checkbox-value').text($('#Syphillis').val());
+                                        });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                            <label class="checkbox-inline custom-box">
+                                <input type="checkbox" class="form-check-input" data-val="false" value="false" id = "Gonorrhea">Gonorrhea
+                            </label>
+
+                                <script>
+                                        $('#checkbox-value').text($('#Gonorrhea').val());
+                                        $("#Gonorrhea").on('change', function() {
+                                          if ($(this).is(':checked')) {
+                                            $(this).attr('value', 'true');
+                                          } else {
+                                            $(this).attr('value', 'false');
+                                          }
+                                          $('#checkbox-value').text($('#Gonorrhea').val());
+                                        });
+                                </script>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-check">
+                            <label class="checkbox-inline custom-box">
+                                <input type="checkbox" class="form-check-input" data-val="false" value="false" id = "Chlamydia">Chlamydia
+                            </label>
+                                <script>
+                                        $('#checkbox-value').text($('#Chlamydia').val());
+                                        $("#Chlamydia").on('change', function() {
+                                          if ($(this).is(':checked')) {
+                                            $(this).attr('value', 'true');
+                                          } else {
+                                            $(this).attr('value', 'false');
+                                          }
+                                          $('#checkbox-value').text($('#Chlamydia').val());
+                                        });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+            </div>
+
+                 <div class="form-group">
+                    <label for="checkup"> <strong> Last Checkup: </strong></label>
+                    <br>
+                    <input type="date" class="form-control" id = "lastcheckup">
+                </div>
+
+                <style>
+                    .req:after { content:" *"; color: red;}
+                </style>
+                
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                    <button type="button submit" class="btn btn-outline-info btn-block" id="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</body>
+
+
+</html>

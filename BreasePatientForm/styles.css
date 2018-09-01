@@ -1,0 +1,19 @@
+body {
+    background-color: #1295D8;
+    height: 100%;
+    width: 100%;
+}
+
+.center {
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+#wrapper {
+    background-color: whitesmoke;
+    height: 100vh;
+    width: 70vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
