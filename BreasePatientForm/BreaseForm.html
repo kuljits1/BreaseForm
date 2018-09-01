@@ -26,7 +26,6 @@
                 messagingSenderId: "Insert messaging ID"
               };
               firebase.initializeApp(config);
-
             
             var dataB = firebase.database(); 
             
@@ -122,12 +121,14 @@
                                 </label>
                                 <script>
                                         $('#checkbox-value').text($('#HIV').val());
+
                                         $("#HIV").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
+
                                           $('#checkbox-value').text($('#HIV').val());
                                         });
                                 </script>
@@ -141,12 +142,14 @@
                                 </label>
                                 <script>
                                         $('#checkbox-value').text($('#Syphillis').val());
+
                                         $("#Syphillis").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
+
                                           $('#checkbox-value').text($('#Syphillis').val());
                                         });
                                 </script>
@@ -162,12 +165,14 @@
 
                                 <script>
                                         $('#checkbox-value').text($('#Gonorrhea').val());
+
                                         $("#Gonorrhea").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
+
                                           $('#checkbox-value').text($('#Gonorrhea').val());
                                         });
                                 </script>
@@ -182,12 +187,14 @@
                             </label>
                                 <script>
                                         $('#checkbox-value').text($('#Chlamydia').val());
+
                                         $("#Chlamydia").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
+
                                           $('#checkbox-value').text($('#Chlamydia').val());
                                         });
                                 </script>
