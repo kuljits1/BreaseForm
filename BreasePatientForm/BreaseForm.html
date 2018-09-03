@@ -26,6 +26,7 @@
                 messagingSenderId: "Insert messaging ID"
               };
               firebase.initializeApp(config);
+
             
             var dataB = firebase.database(); 
             
@@ -38,11 +39,22 @@
                   var hour = a.getHours();
                   var min = a.getMinutes();
                   var sec = a.getSeconds();
-                  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+                  var time = date + '-' + month + '-' + year + ' ' + hour + ':' + min + ':' + sec;
                   return time;
             }
              
             
+            
+            function changeDateStyle(UNIX_timestamp) {
+                  var time = UNIX_timestamp; 
+                  var year = time.slice(0,4); 
+                  var month = time.slice(5,7)
+                  var day = time.slice(8,10); 
+                  var date = month + '-' + day + '-' + year; 
+                  return date; 
+                
+            }
+             
             
             function inputPatientInformation() {
                 
@@ -53,7 +65,7 @@
                 var Hiv = document.getElementById("HIV").value
                 var Gono = document.getElementById("Gonorrhea").value
                 var Chlam = document.getElementById("Chlamydia").value
-                var check_up = document.getElementById("lastcheckup").value
+                var check_up = changeDateStyle(document.getElementById("lastcheckup").value)
                 var timestamp = TimeStamp(Date.now());  
                  
                 
@@ -121,14 +133,12 @@
                                 </label>
                                 <script>
                                         $('#checkbox-value').text($('#HIV').val());
-
                                         $("#HIV").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
-
                                           $('#checkbox-value').text($('#HIV').val());
                                         });
                                 </script>
@@ -142,14 +152,12 @@
                                 </label>
                                 <script>
                                         $('#checkbox-value').text($('#Syphillis').val());
-
                                         $("#Syphillis").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
-
                                           $('#checkbox-value').text($('#Syphillis').val());
                                         });
                                 </script>
@@ -165,14 +173,12 @@
 
                                 <script>
                                         $('#checkbox-value').text($('#Gonorrhea').val());
-
                                         $("#Gonorrhea").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
-
                                           $('#checkbox-value').text($('#Gonorrhea').val());
                                         });
                                 </script>
@@ -187,14 +193,12 @@
                             </label>
                                 <script>
                                         $('#checkbox-value').text($('#Chlamydia').val());
-
                                         $("#Chlamydia").on('change', function() {
                                           if ($(this).is(':checked')) {
                                             $(this).attr('value', 'true');
                                           } else {
                                             $(this).attr('value', 'false');
                                           }
-
                                           $('#checkbox-value').text($('#Chlamydia').val());
                                         });
                                 </script>
